@@ -58,3 +58,32 @@ def desplegart(x):
         print('tamanio invalido.')
 #print('ingrese el tamanio del tablero. tome en cuenta que el tablero no puede ser mas pequenio de 5x6 y no puede ser mas grande de 10x10')
 #escala = input('tamanio: ')
+
+def hvsh(x,y,z):
+    global j1, j2, emp, tablero
+    cont = 0
+    if z == 0:
+        print(x,"va primero")
+    else:
+        print(y,"va primero")
+    while True:
+        if z == 0:
+            print("Es el turno de", x)
+            posi = ("Ingrese la fila que desee: ")
+            #esto no esta terminado
+            
+def main():
+    global j1, j2, empa
+    while True:
+        print("1------HvsH")
+        opcion = int(input(""))
+        try:
+            if opcion == 1:
+                desplegart()
+                n1 = input("\nIngrese el 1 jugador: ")
+                n2 = input("Ingrese el 2 jugador: ")
+                j = random.randint(0,1)
+                hvsh(n1,n2,j)
+        except ValueError:
+            print("Nel")
+main()
