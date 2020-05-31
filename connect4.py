@@ -72,7 +72,7 @@ def verificacion(x,y,z):
 				return True
 
 def hvsh(p,r,x,y,z):
-    global j1, j2, emp, tablero
+    global j1, j2, emp, tablero, n1, n2
     cont = 0
     if z == 0:
         print(x,"va primero")
@@ -84,10 +84,9 @@ def hvsh(p,r,x,y,z):
             posi = int(input("Ingrese la fila que desee: "))
             jugada(posi,z)
             desplegart(p,r)
-            #no he probado el resto
             z += 1
             cont += 1
-            if cont == len(tablero):
+            if cont == p * r:
                 print("Es un empate!")
                 emp += 1
                 break
@@ -96,22 +95,47 @@ def hvsh(p,r,x,y,z):
             posi = int(input("Ingrese la fila que desee: "))
             jugada(posi,z)
             desplegart(p,r)
-            z += 1
+            z -= 1
             cont += 1
-            if cont == len(tablero):
+            if cont == p * r:
                 print("Es un empate!")
                 emp += 1
-                break
-        if gana(x,y):
-            print(selec,"gano la partida!")
-            if selec == x:
+                print("Quieres la revancha? s/n")
+                p = input(">>>")
+                if p == "s":
+                    jugada(posi,z).clear()
+                    hvsh(p,r,x,y,z)
+                else:
+                    break
+            else:
+                print("Error!")
+        if verificacion(p,r,piezaR):
+            print(x,"gano la partida!")
+            if selec == piezaR:
                 j1 += 1
             else:
                 j2 += 1
-            print("Quieres la revancha?")
+                print("Quieres la revancha? s/n")
+                p = input(">>>")
+                if p == "s":
+                    jugada(posi,z).clear()
+                    hvsh(p,r,x,y,z)
+                else:
+                    break
+        elif verificacion(p,r,piezaV):
+            print(y,"gano la partida!")
+            if selec == piezaV:
+                j1 += 1
+            else:
+                j2 += 1
+            print("Quieres la revancha? s/n")
             p = input(">>>")
-            if p == "n":
+            if p == "s":
+                jugada(posi,z).clear()
+                hvsh(p,r,x,y,z)
+            else:
                 break
+
 
 
 def main():
