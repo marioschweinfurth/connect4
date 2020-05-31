@@ -99,7 +99,7 @@ def hvsh(p,r,x,y,z):
             posi = int(input("Ingrese la fila que desee: "))
             jugada(posi,z)
             desplegart(p,r)
-            z += 1
+            z -= 1
             cont += 1
             if cont == p * r:
                 print("Es un empate!")
