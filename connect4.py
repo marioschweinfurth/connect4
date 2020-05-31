@@ -66,7 +66,7 @@ def verificacion(x,y,z):
 				return True
 
 	for i in range(x):
-		for j in range(y-3):
+		for j in range(y-4):
 			if tablero[j][i] == z and tablero[j+1][i] == z and tablero[j+2][i] == z and tablero[j+3][i] == z:
 				return True
 
