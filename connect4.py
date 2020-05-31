@@ -76,7 +76,7 @@ def verificacion(x,y,z):
 				return True
 
 def hvsh(p,r,x,y,z):
-    global j1, j2, emp, tablero
+    global j1, j2, emp, tablero, n1, n2
     cont = 0
     if z == 0:
         print(x,"va primero")
@@ -104,23 +104,40 @@ def hvsh(p,r,x,y,z):
             if cont == p * r:
                 print("Es un empate!")
                 emp += 1
-                break
-		#Ignore lo de abajo que solo estoy probando
+                print("Quieres la revancha? s/n")
+                p = input(">>>")
+                if p == "s":
+                    jugada(posi,z).clear()
+                    hvsh(p,r,x,y,z)
+                else:
+                    break
+            else:
+                print("Error!")
         if verificacion(p,r,piezaR):
-            print(selec,"gano la partida!")
-            if selec == x:
+            print(x,"gano la partida!")
+            if selec == piezaR:
                 j1 += 1
             else:
                 j2 += 1
+                print("Quieres la revancha? s/n")
+                p = input(">>>")
+                if p == "s":
+                    jugada(posi,z).clear()
+                    hvsh(p,r,x,y,z)
+                else:
+                    break
         elif verificacion(p,r,piezaV):
-            print(selec,"gano la partida!")
-            if selec == x:
+            print(y,"gano la partida!")
+            if selec == piezaV:
                 j1 += 1
             else:
                 j2 += 1
-            print("Quieres la revancha?")
+            print("Quieres la revancha? s/n")
             p = input(">>>")
-            if p == "n":
+            if p == "s":
+                jugada(posi,z).clear()
+                hvsh(p,r,x,y,z)
+            else:
                 break
 
 
