@@ -190,24 +190,25 @@ def main():
         try:
             opcion = int(input(""))
             if opcion == 1:
-                while True:
+                true = True
+                while true:
                     print("Ingrese el tamanio de la tabla: ")
                     try:
                         p = int(input("Fila: "))
                         if p > 4 and p < 11:
-                            r = int(input("Columna: "))
-                            if r > 5 and r < 11:
-                                tabla(p,r)
-                                desplegart(p,r)
-                                n1 = input("\nIngrese el 1 jugador: ")
-                                n2 = input("Ingrese el 2 jugador: ")
-                                j = random.randint(0,1)
-                                while hvsh(p,r,n1,n2,j):
-                                    print('oooh shit, here we go again')
-                                break
-
-                            else:
-                                print('el tamanio de la columna es invalido.\n')
+                            while true:
+                                r = int(input("Columna: "))
+                                if r > 5 and r < 11:
+                                    tabla(p,r)
+                                    desplegart(p,r)
+                                    n1 = input("\nIngrese el 1 jugador: ")
+                                    n2 = input("Ingrese el 2 jugador: ")
+                                    j = random.randint(0,1)
+                                    while hvsh(p,r,n1,n2,j):
+                                        print('oooh shit, here we go again\n')
+                                    true = False
+                                else:
+                                    print('el tamanio de la columna es invalido.\n')
                         else:
                             print('el tamanio de la fila es invalido.\n')
                     except ValueError:
