@@ -60,8 +60,38 @@ def hvsh(x,y,z):
     while True:
         if z == 0:
             print("Es el turno de", x)
-            posi = ("Ingrese la fila que desee: ")
-            #esto no esta terminado
+            posi = int(input("Ingrese la fila que desee: "))
+            jugada(posi,z)
+            desplegart()
+            #no he probado el resto 
+            z += 1
+            cont += 1
+            if cont == len(tablero):
+                print("Es un empate!")
+                emp += 1
+                break
+        elif z == 1:
+            print("Es el turno de", y)
+            posi = int(input("Ingrese la fila que desee: "))
+            jugada(posi,z)
+            print(deslplegart(x))
+            z += 1
+            cont += 1
+            if cont == len(tablero):
+                print("Es un empate!")
+                emp += 1
+                break
+        if gana(x,y):
+            print(selec,"gano la partida!")
+            if selec == x:
+                j1 += 1
+            else:
+                j2 += 1
+            print("Quieres la revancha?")
+            p = input(">>>")
+            if p == "n":
+                break
+
 
 def main():
     global j1, j2, empa
@@ -73,11 +103,16 @@ def main():
             opcion = int(input(""))
             if opcion == 1:
 
-                desplegart()
+                print("Ingrese el tamanio de la tabla: ")
+                x = int(input("Columna: "))
+                y = int(input("Fila: "))
+                tablero(x,y)
+                desplegart(x,y)
                 n1 = input("\nIngrese el 1 jugador: ")
                 n2 = input("Ingrese el 2 jugador: ")
                 j = random.randint(0,1)
                 hvsh(n1,n2,j)
+                
             elif opcion == 2:
                 escala = input('-->')
                 if escalaT.fullmatch(escala):
