@@ -91,20 +91,21 @@ def verificacion(x,y,z):
 def hvsh(p,r,x,y,z):
     global j1, j2, emp, tablero, n1, n2, true
     cont = 0
+    tiradas = p*r
     if z == 0:
-        print(x,"va primero")
+        print(x,"va primero\n")
     else:
-        print(y,"va primero")
+        print(y,"va primero\n")
     while True:
         if z == 0:
-            print("Es el turno de", x)
+            print("Es el turno de!", x)
             try:
-                posi = int(input("Ingrese la fila que desee: "))
+                posi = int(input("\nIngrese la fila que desee: "))
                 if posi>0 and posi < r+1:
                     if cont == (p * r)-1:
                         print("Es un empate!")
                         emp += 1
-                        print("Quieres la revancha? s/n")
+                        print("\nQuieres la revancha? s/n")
                         revancha = input(">>>")
                         if revancha == "s":
                             z += 1
@@ -118,10 +119,15 @@ def hvsh(p,r,x,y,z):
                             break
                     elif jugada(posi,z):
                         desplegart(p,r)
+                        print('tiradas faltantes!', tiradas-1)
+                        tiradas -= 1
+                        print('jugador:', x, 'con fichas', piezaR, end=" || ")
+                        print('jugador:', y, 'con fichas', piezaV)
+                        print('')
                         if verificacion(p,r,piezaR):
                             print(x,"gano la partida!\n")
                             j2+= 1
-                            print("Quieres la revancha? s/n")
+                            print("\nQuieres la revancha? s/n")
                             revancha = input(">>>")
                             if revancha == "s":
                                 z += 1
@@ -135,6 +141,7 @@ def hvsh(p,r,x,y,z):
                                 break
                         z += 1
                         cont += 1
+
                     else:
                         print('no hay espacio! :( \n')
                 else:
@@ -145,12 +152,12 @@ def hvsh(p,r,x,y,z):
         elif z == 1:
             print("Es el turno de", y)
             try:
-                posi = int(input("Ingrese la fila que desee: "))
+                posi = int(input("\nIngrese la fila que desee: "))
                 if posi>0 and posi < r+1:
                     if cont == (p * r)-1:
                         print("Es un empate!")
                         emp += 1
-                        print("Quieres la revancha? s/n")
+                        print("\nQuieres la revancha? s/n")
                         revancha = input(">>>")
                         if revancha == "s":
                             z = 1
@@ -164,10 +171,15 @@ def hvsh(p,r,x,y,z):
                             break
                     elif jugada(posi,z):
                         desplegart(p,r)
+                        print('\ntiradas faltantes!', tiradas-1)
+                        tiradas -= 1
+                        print('jugador:', x, 'con fichas', piezaR, end=" || ")
+                        print('jugador:', y, 'con fichas', piezaV)
+                        print('')
                         if verificacion(p,r,piezaV):
                             print(y,"gano la partida!\n")
                             j2+= 1
-                            print("Quieres la revancha? s/n")
+                            print("\nQuieres la revancha? s/n")
                             revancha = input(">>>")
                             if revancha == "s":
                                 z -= 1
