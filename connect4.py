@@ -88,10 +88,9 @@ def hvsh(p,r,x,y,z):
             posi = int(input("Ingrese la fila que desee: "))
             jugada(posi,z)
             desplegart(p,r)
-            #no he probado el resto
             z += 1
             cont += 1
-            if cont == len(tablero):
+            if cont == p * r:
                 print("Es un empate!")
                 emp += 1
                 break
@@ -102,11 +101,18 @@ def hvsh(p,r,x,y,z):
             desplegart(p,r)
             z += 1
             cont += 1
-            if cont == len(tablero):
+            if cont == p * r:
                 print("Es un empate!")
                 emp += 1
                 break
-        if gana(x,y):
+		#Ignore lo de abajo que solo estoy probando
+        if verificacion(p,r,piezaR):
+            print(selec,"gano la partida!")
+            if selec == x:
+                j1 += 1
+            else:
+                j2 += 1
+        elif verificacion(p,r,piezaV):
             print(selec,"gano la partida!")
             if selec == x:
                 j1 += 1
@@ -116,6 +122,7 @@ def hvsh(p,r,x,y,z):
             p = input(">>>")
             if p == "n":
                 break
+
 
 
 def main():
