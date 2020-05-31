@@ -44,6 +44,14 @@ def jugada(x,y):
         return False
 
 def desplegart(x,y):
+    for i in range(0,y):
+        if i == 0:
+            print('|', end='')
+            print(i+1, end=' |')
+        elif i == y-1:
+            print(i+1, end=' |\n')
+        else:
+            print(i+1, end=' |')
     for i in range(0,x):
         for j in range(0,y):
             if j == 0:
@@ -197,18 +205,22 @@ def main():
                         p = int(input("Fila: "))
                         if p > 4 and p < 11:
                             while true:
-                                r = int(input("Columna: "))
-                                if r > 5 and r < 11:
-                                    tabla(p,r)
-                                    desplegart(p,r)
-                                    n1 = input("\nIngrese el 1 jugador: ")
-                                    n2 = input("Ingrese el 2 jugador: ")
-                                    j = random.randint(0,1)
-                                    while hvsh(p,r,n1,n2,j):
-                                        print('oooh shit, here we go again\n')
-                                    true = False
-                                else:
-                                    print('el tamanio de la columna es invalido.\n')
+                                try:
+                                    r = int(input("Columna: "))
+                                    if r > 5 and r < 11:
+                                        tabla(p,r)
+                                        print('')
+                                        desplegart(p,r)
+                                        n1 = input("\nnombre del 1 jugador: ")
+                                        n2 = input("nombre del 2 jugador: ")
+                                        j = random.randint(0,1)
+                                        while hvsh(p,r,n1,n2,j):
+                                            print('oooh shit, here we go again\n')
+                                        true = False
+                                    else:
+                                        print('el tamanio de la columna es invalido.\n')
+                                except ValueError:
+                                    print('dato ingresado no es una numero.\n')
                         else:
                             print('el tamanio de la fila es invalido.\n')
                     except ValueError:
