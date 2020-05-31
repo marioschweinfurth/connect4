@@ -34,18 +34,18 @@ def jugada(x,y):
                 break
     tablero.reverse()
 
-def desplegart():
-    for i in range(0,linea):
-        for j in range(0,columna):
+def desplegart(x,y):
+    for i in range(0,x):
+        for j in range(0,y):
             if j == 0:
                 print('|', end='')
                 print(tablero[i][j], end=' |')
-            elif j == columna-1:
+            elif j == y-1:
                 print(tablero[i][j], end=' |\n')
             else:
                 print(tablero[i][j], end=' |')
-    for i in range(0,columna+1):
-        if i == columna:
+    for i in range(0,y+1):
+        if i == y:
             print('---')
         else:
             print('---', end='')
@@ -75,7 +75,7 @@ def verificacion(x,y,z):
 			if tablero[j][i] == z and tablero[j-1][i+1] == z and tablero[j-2][i+2] == z and tablero[j-3][i+3] == z:
 				return True
 
-def hvsh(x,y,z):
+def hvsh(p,r,x,y,z):
     global j1, j2, emp, tablero
     cont = 0
     if z == 0:
@@ -85,8 +85,38 @@ def hvsh(x,y,z):
     while True:
         if z == 0:
             print("Es el turno de", x)
-            posi = ("Ingrese la fila que desee: ")
-            #esto no esta terminado
+            posi = int(input("Ingrese la fila que desee: "))
+            jugada(posi,z)
+            desplegart(p,r)
+            #no he probado el resto
+            z += 1
+            cont += 1
+            if cont == len(tablero):
+                print("Es un empate!")
+                emp += 1
+                break
+        elif z == 1:
+            print("Es el turno de", y)
+            posi = int(input("Ingrese la fila que desee: "))
+            jugada(posi,z)
+            desplegart(p,r)
+            z += 1
+            cont += 1
+            if cont == len(tablero):
+                print("Es un empate!")
+                emp += 1
+                break
+        if gana(x,y):
+            print(selec,"gano la partida!")
+            if selec == x:
+                j1 += 1
+            else:
+                j2 += 1
+            print("Quieres la revancha?")
+            p = input(">>>")
+            if p == "n":
+                break
+
 
 def main():
     global j1, j2, empa
@@ -97,22 +127,26 @@ def main():
         try:
             opcion = int(input(""))
             if opcion == 1:
-
-                desplegart()
+                print("Ingrese el tamanio de la tabla: ")
+                p = int(input("Columna: "))
+                r = int(input("Fila: "))
+                tablero(p,r)
+                desplegart(p,r)
                 n1 = input("\nIngrese el 1 jugador: ")
                 n2 = input("Ingrese el 2 jugador: ")
                 j = random.randint(0,1)
-                hvsh(n1,n2,j)
+                hvsh(p,r,n1,n2,j)
+
             elif opcion == 2:
                 escala = input('-->')
                 if escalaT.fullmatch(escala):
-                    linea = int(escala[0])
-                    columna = int(escala[2])
+                    x = int(escala[0])
+                    y = int(escala[2])
                 elif escalaT2.fullmatch(escala):
-                    linea = int(escala[0:2])
-                    columna = int(escala[3:5])
-                tablero(linea,columna)
-                desplegart(linea,columna)
+                    x = int(escala[0:2])
+                    y = int(escala[3:5])
+                tablero(x,y)
+                desplegart(x,y)
 
             elif opcion == 4:
                 print('bye')
@@ -122,11 +156,4 @@ def main():
         except ValueError:
             print("Nel")
 
-#main()
-linea = 5
-columna = 6
-tablero(5,6)
-desplegart()
-jugada(1,0)
-desplegart()
-jugada(2,0)
+main()
