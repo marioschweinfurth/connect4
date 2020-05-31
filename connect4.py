@@ -92,7 +92,7 @@ def hvsh(p,r,x,y,z):
             print("Es el turno de", x)
             try:
                 posi = int(input("Ingrese la fila que desee: "))
-                if posi >5 or posi <= r:
+                if posi>0 and posi < r+1:
                     if cont == (p * r)-1:
                         print("Es un empate!")
                         emp += 1
@@ -138,7 +138,7 @@ def hvsh(p,r,x,y,z):
             print("Es el turno de", y)
             try:
                 posi = int(input("Ingrese la fila que desee: "))
-                if posi >5 or posi <= r:
+                if posi>0 and posi < r+1:
                     if cont == (p * r)-1:
                         print("Es un empate!")
                         emp += 1
@@ -194,25 +194,24 @@ def main():
                     print("Ingrese el tamanio de la tabla: ")
                     try:
                         p = int(input("Fila: "))
-                        if p > 4 or p < 11:
+                        if p > 4 and p < 11:
                             r = int(input("Columna: "))
-                            if r > 5 or r < 11:
+                            if r > 5 and r < 11:
                                 tabla(p,r)
                                 desplegart(p,r)
                                 n1 = input("\nIngrese el 1 jugador: ")
                                 n2 = input("Ingrese el 2 jugador: ")
                                 j = random.randint(0,1)
-                                hvsh(p,r,n1,n2,j)
-                                if true == True:
-                                    hvsh(p,r,n1,n2,j)
-                                else:
-                                    break
+                                while hvsh(p,r,n1,n2,j):
+                                    print('oooh shit, here we go again')
+                                break
+
                             else:
-                                print('el tamanio de la columna es invalido.')
+                                print('el tamanio de la columna es invalido.\n')
                         else:
-                            print('el tamanio de la fila es invalido.')
+                            print('el tamanio de la fila es invalido.\n')
                     except ValueError:
-                        print('eso no es un numero.')
+                        print('eso no es un numero.\n')
 
 
 
