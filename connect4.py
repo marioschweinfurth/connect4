@@ -5,8 +5,12 @@ escalaT = re.compile('[5-9][x][6-9]')
 escalaT2 = re.compile('[1][0][x][1][0]')
 piezaR = "\033[0;31;01mO\033[0;37;01m"
 piezaV = "\033[0;32;01mO\033[0;37;01m"
+j1 = 0
+j2 = 0
+emp = 0
 
-def tablero(x,y):
+
+def tabla(x,y):
     global tablero
     tablero = []
     for i in range(0,x):
@@ -18,21 +22,26 @@ def tablero(x,y):
 def jugada(x,y):
     global tablero, piezaR, piezaV
     diccionario = {1:0,2:1,3:2,4:3,5:4,6:5,7:6,8:7,9:8,10:9}
-    x = diccionario[x]
-    tablero.reverse()
-    if y == 0:
-        for i in range(0,len(tablero)+1):
-            if tablero[i][x] == ' ':
-                tablero[i].pop(x)
-                tablero[i].insert(x,piezaR)
-                break
+    if x in diccionario:
+        x = diccionario[x]
+        tablero.reverse()
+        if y == 0:
+            for i in range(0,len(tablero)):
+                if tablero[i][x] == ' ':
+                    tablero[i].pop(x)
+                    tablero[i].insert(x,piezaR)
+                    tablero.reverse()
+                    return True
+        else:
+            for i in range(0,len(tablero)):
+                if tablero[i][x] == ' ':
+                    tablero[i].pop(x)
+                    tablero[i].insert(x,piezaV)
+                    tablero.reverse()
+                    return True
+        tablero.reverse()
     else:
-        for i in range(0,len(tablero)+1):
-            if tablero[i][x] == ' ':
-                tablero[i].pop(x)
-                tablero[i].insert(x,piezaV)
-                break
-    tablero.reverse()
+        return False
 
 def desplegart(x,y):
     for i in range(0,x):
@@ -51,8 +60,8 @@ def desplegart(x,y):
             print('---', end='')
 
 def verificacion(x,y,z):
-	for i in range(x):
-		for j in range(y-3):
+	for i in range(y-3):
+		for j in range(x):
 			if tablero[i][j] == z and tablero[i][j+1] == z and tablero[i][j+2] == z and tablero[i][j+3] == z:
 				return True
 
@@ -81,92 +90,121 @@ def hvsh(p,r,x,y,z):
     while True:
         if z == 0:
             print("Es el turno de", x)
-            posi = int(input("Ingrese la fila que desee: "))
-            jugada(posi,z)
-            desplegart(p,r)
-            z += 1
-            cont += 1
-            if cont == p * r:
-                print("Es un empate!")
-                emp += 1
-                break
+            try:
+                posi = int(input("Ingrese la fila que desee: "))
+                if jugada(posi,z):
+                    desplegart(p,r)
+                    if verificacion(p,r,piezaR):
+                        print(x,"gano la partida!\n")
+                        j2+= 1
+                        print("Quieres la revancha? s/n")
+                        revancha = input(">>>")
+                        if revancha == "s":
+                            z += 1
+                            del tablero
+                            tabla(p,r)
+                            desplegart(p,r)
+                            return True
+                        else:
+                            del tablero
+                            break
+                    z += 1
+                    cont += 1
+                elif cont == (p * r)-1:
+                    print("Es un empate!")
+                    emp += 1
+                    print("Quieres la revancha? s/n")
+                    revancha = input(">>>")
+                    if revancha == "s":
+                        z += 1
+                        del tablero
+                        tabla(p,r)
+                        desplegart(p,r)
+                        return True
+                    else:
+                        del tablero
+                        break
+                else:
+                    print('no hay espacio! :( \n')
+            except ValueError:
+                print('esa opcion no es una linea! :(\n')
+
         elif z == 1:
             print("Es el turno de", y)
-            posi = int(input("Ingrese la fila que desee: "))
-            jugada(posi,z)
-            desplegart(p,r)
-            z -= 1
-            cont += 1
-            if cont == p * r:
-                print("Es un empate!")
-                emp += 1
-                print("Quieres la revancha? s/n")
-                p = input(">>>")
-                if p == "s":
-                    jugada(posi,z).clear()
-                    hvsh(p,r,x,y,z)
+            try:
+                posi = int(input("Ingrese la fila que desee: "))
+                if jugada(posi,z):
+                    desplegart(p,r)
+                    if verificacion(p,r,piezaV):
+                        print(y,"gano la partida!\n")
+                        j2+= 1
+                        print("Quieres la revancha? s/n")
+                        revancha = input(">>>")
+                        if revancha == "s":
+                            z -= 1
+                            del tablero
+                            tabla(p,r)
+                            desplegart(p,r)
+                            return True
+                        else:
+                            del tablero
+                            break
+                    z -= 1
+                    cont += 1
+                elif cont == (p * r)-1:
+                    print("Es un empate!")
+                    emp += 1
+                    print("Quieres la revancha? s/n")
+                    revancha = input(">>>")
+                    if revancha == "s":
+                        z = 1
+                        del tablero
+                        tabla(p,r)
+                        desplegart(p,r)
+                        return True
+                    else:
+                        del tablero
+                        break
                 else:
-                    break
-            else:
-                print("Error!")
-        if verificacion(p,r,piezaR):
-            print(x,"gano la partida!")
-            if selec == piezaR:
-                j1 += 1
-            else:
-                j2 += 1
-                print("Quieres la revancha? s/n")
-                p = input(">>>")
-                if p == "s":
-                    jugada(posi,z).clear()
-                    hvsh(p,r,x,y,z)
-                else:
-                    break
-        elif verificacion(p,r,piezaV):
-            print(y,"gano la partida!")
-            if selec == piezaV:
-                j1 += 1
-            else:
-                j2 += 1
-            print("Quieres la revancha? s/n")
-            p = input(">>>")
-            if p == "s":
-                jugada(posi,z).clear()
-                hvsh(p,r,x,y,z)
-            else:
-                break
-
-
+                    print('no hay espacio! :( \n')
+            except ValueError:
+                print('esa opcion no es una linea! :(\n')
 
 def main():
-    global j1, j2, empa
+    global j1, j2, emp, tablero
     while True:
-        print("1------HvsH")
-        print('2. escala de tablero')
+        print("1. HvsH")
+        print('2. MvsH.... proximamente')
+        print('3. MvsM.... proximamente')
         print('4. salir')
         try:
             opcion = int(input(""))
             if opcion == 1:
-                print("Ingrese el tamanio de la tabla: ")
-                p = int(input("Columna: "))
-                r = int(input("Fila: "))
-                tablero(p,r)
-                desplegart(p,r)
-                n1 = input("\nIngrese el 1 jugador: ")
-                n2 = input("Ingrese el 2 jugador: ")
-                j = random.randint(0,1)
-                hvsh(p,r,n1,n2,j)
+                while True:
+                    print("Ingrese el tamanio de la tabla: ")
+                    try:
+                        p = int(input("Fila: "))
+                        if p > 4 or p < 11:
+                            r = int(input("Columna: "))
+                            if r > 5 or r < 11:
+                                tabla(p,r)
+                                desplegart(p,r)
+                                n1 = input("\nIngrese el 1 jugador: ")
+                                n2 = input("Ingrese el 2 jugador: ")
+                                j = random.randint(0,1)
+                                hvsh(p,r,n1,n2,j)
+                                if hvsh(p,r,n1,n2,j):
+                                    hvsh(p,r,n1,n2,j)
+                                else:
+                                    break
+                            else:
+                                print('el tamanio de la columna es invalido.')
+                        else:
+                            print('el tamanio de la fila es invalido.')
+                    except ValueError:
+                        print('eso no es un numero.')
 
-            elif opcion == 2:
-                escala = input('-->')
-                if escalaT.fullmatch(escala):
-                    x = int(escala[0])
-                    y = int(escala[2])
-                elif escalaT2.fullmatch(escala):
-                    x = int(escala[0:2])
-                    y = int(escala[3:5])
-                tablero(x,y)
-                desplegart(x,y)
+
 
             elif opcion == 4:
                 print('bye')
@@ -174,6 +212,6 @@ def main():
             else:
                 print('opcion invalida')
         except ValueError:
-            print("Nel")
+            print("opcion invalida")
 
 main()
