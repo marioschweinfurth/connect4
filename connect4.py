@@ -34,21 +34,46 @@ def jugada(x,y):
                 break
     tablero.reverse()
 
-def desplegart(x,y):
-    for i in range(0,x):
-        for j in range(0,y):
+def desplegart():
+    for i in range(0,linea):
+        for j in range(0,columna):
             if j == 0:
                 print('|', end='')
                 print(tablero[i][j], end=' |')
-            elif j == y-1:
+            elif j == columna-1:
                 print(tablero[i][j], end=' |\n')
             else:
                 print(tablero[i][j], end=' |')
-    for i in range(0,y+1):
-        if i == y:
+    for i in range(0,columna+1):
+        if i == columna:
             print('---')
         else:
             print('---', end='')
+
+def verificacion(x,y,z):
+	# Check horizontal locations for win
+	for i in range(y-3):
+		for j in range(x):
+			if tablero[j][i] == z and tablero[j][i+1] == z and tablero[j][i+2] == z and tablero[j][i+3] == z:
+				return True
+
+	# Check vertical locations for win
+	for i in range(y):
+		for j in range(x-3):
+			if tablero[j][i] == z and tablero[j+1][i] == z and tablero[j+2][i] == z and tablero[j+3][i] == z:
+				return True
+
+	# Check positively sloped diaganols
+	for i in range(y-3):
+		for j in range(x-3):
+			if tablero[j][i] == z and tablero[j+1][i+1] == z and tablero[j+2][i+2] == z and tablero[j+3][i+3] == z:
+				return True
+
+	# Check negatively sloped diaganols
+	for i in range(y-3):
+		for j in range(3, x):
+			if tablero[j][i] == z and tablero[j-1][i+1] == z and tablero[j-2][i+2] == z and tablero[j-3][i+3] == z:
+				return True
 
 def hvsh(x,y,z):
     global j1, j2, emp, tablero
@@ -97,4 +122,11 @@ def main():
         except ValueError:
             print("Nel")
 
-main()
+#main()
+linea = 5
+columna = 6
+tablero(5,6)
+desplegart()
+jugada(1,0)
+desplegart()
+jugada(2,0)
