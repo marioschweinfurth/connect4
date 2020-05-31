@@ -34,18 +34,18 @@ def jugada(x,y):
                 break
     tablero.reverse()
 
-def desplegart(x,y):
-    for i in range(0,x):
-        for j in range(0,y):
+def desplegart():
+    for i in range(0,fila):
+        for j in range(0,columna):
             if j == 0:
                 print('|', end='')
                 print(tablero[i][j], end=' |')
-            elif j == y-1:
+            elif j == columna-1:
                 print(tablero[i][j], end=' |\n')
             else:
                 print(tablero[i][j], end=' |')
-    for i in range(0,y+1):
-        if i == y:
+    for i in range(0,columna+1):
+        if i == columna:
             print('---')
         else:
             print('---', end='')
@@ -104,8 +104,8 @@ def main():
             if opcion == 1:
 
                 print("Ingrese el tamanio de la tabla: ")
-                x = int(input("Columna: "))
-                y = int(input("Fila: "))
+                columna = int(input("Columna: "))
+                fila = int(input("Fila: "))
                 tablero(x,y)
                 desplegart(x,y)
                 n1 = input("\nIngrese el 1 jugador: ")
@@ -116,10 +116,10 @@ def main():
             elif opcion == 2:
                 escala = input('-->')
                 if escalaT.fullmatch(escala):
-                    linea = int(escala[0])
+                    fila = int(escala[0])
                     columna = int(escala[2])
                 elif escalaT2.fullmatch(escala):
-                    linea = int(escala[0:2])
+                    fila = int(escala[0:2])
                     columna = int(escala[3:5])
                 tablero(linea,columna)
                 desplegart(linea,columna)
