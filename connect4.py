@@ -7,6 +7,7 @@ piezaR = "\033[0;31;01mO\033[0;37;01m"
 piezaV = "\033[0;32;01mO\033[0;37;01m"
 
 def tablero(x,y):
+    global tablero
     tablero = []
     for i in range(0,x):
         tablero.append([])
@@ -33,45 +34,21 @@ def jugada(x,y):
                 break
     tablero.reverse()
 
-def desplegart(x):
-    global tablero
-    if escalaT.fullmatch(x):
-        li = int(x[0])
-        colu = int(x[2])
-        for i in range(0,li):
-            for j in range(0,colu):
-                if j == 0:
-                    print('|', end='')
-                    print(tablero[i][j], end=' |')
-                elif j == colu-1:
-                    print(tablero[i][j], end=' |\n')
-                else:
-                    print(tablero[i][j], end=' |')
-        for i in range(0,colu+1):
-            if i == colu:
-                print('---')
+def desplegart(x,y):
+    for i in range(0,x):
+        for j in range(0,y):
+            if j == 0:
+                print('|', end='')
+                print(tablero[i][j], end=' |')
+            elif j == y-1:
+                print(tablero[i][j], end=' |\n')
             else:
-                print('---', end='')
-    elif escalaT2.fullmatch(x):
-        li = int(x[0:2])
-        colu = int(x[3:5])
-        for i in range(0,li):
-            for j in range(0,colu):
-                if j == 0:
-                    print('|', end='')
-                    print(tablero[i][j], end=' |')
-                elif j == colu-1:
-                    print(tablero[i][j], end=' |\n')
-                else:
-                    print(tablero[i][j], end=' |')
-        for i in range(0,colu+1):
-            if i == colu:
-                print('---')
-            else:
-                print('---', end='')
-    else:
-        print('tamanio invalido.')
-
+                print(tablero[i][j], end=' |')
+    for i in range(0,y+1):
+        if i == y:
+            print('---')
+        else:
+            print('---', end='')
 
 def hvsh(x,y,z):
     global j1, j2, emp, tablero
@@ -90,15 +67,28 @@ def main():
     global j1, j2, empa
     while True:
         print("1------HvsH")
+        print('2. escala de tablero')
         print('4. salir')
         try:
             opcion = int(input(""))
             if opcion == 1:
+
                 desplegart()
                 n1 = input("\nIngrese el 1 jugador: ")
                 n2 = input("Ingrese el 2 jugador: ")
                 j = random.randint(0,1)
                 hvsh(n1,n2,j)
+            elif opcion == 2:
+                escala = input('-->')
+                if escalaT.fullmatch(escala):
+                    linea = int(escala[0])
+                    columna = int(escala[2])
+                elif escalaT2.fullmatch(escala):
+                    linea = int(escala[0:2])
+                    columna = int(escala[3:5])
+                tablero(linea,columna)
+                desplegart(linea,columna)
+
             elif opcion == 4:
                 print('bye')
                 break
@@ -106,4 +96,5 @@ def main():
                 print('opcion invalida')
         except ValueError:
             print("Nel")
+
 main()
