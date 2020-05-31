@@ -51,25 +51,21 @@ def desplegart(x,y):
             print('---', end='')
 
 def verificacion(x,y,z):
-	# Check horizontal locations for win
-	for i in range(y-3):
-		for j in range(x):
-			if tablero[j][i] == z and tablero[j][i+1] == z and tablero[j][i+2] == z and tablero[j][i+3] == z:
+	for i in range(x):
+		for j in range(y-3):
+			if tablero[i][j] == z and tablero[i][j+1] == z and tablero[i][j+2] == z and tablero[i][j+3] == z:
 				return True
 
-	# Check vertical locations for win
-	for i in range(y):
-		for j in range(x-3):
+	for i in range(x):
+		for j in range(y-3):
 			if tablero[j][i] == z and tablero[j+1][i] == z and tablero[j+2][i] == z and tablero[j+3][i] == z:
 				return True
 
-	# Check positively sloped diaganols
 	for i in range(y-3):
 		for j in range(x-3):
 			if tablero[j][i] == z and tablero[j+1][i+1] == z and tablero[j+2][i+2] == z and tablero[j+3][i+3] == z:
 				return True
 
-	# Check negatively sloped diaganols
 	for i in range(y-3):
 		for j in range(3, x):
 			if tablero[j][i] == z and tablero[j-1][i+1] == z and tablero[j-2][i+2] == z and tablero[j-3][i+3] == z:
