@@ -8,7 +8,7 @@ piezaV = "\033[0;32;01mO\033[0;37;01m"
 j1 = 0
 j2 = 0
 emp = 0
-
+true = True
 
 def tabla(x,y):
     global tablero
@@ -60,8 +60,8 @@ def desplegart(x,y):
             print('---', end='')
 
 def verificacion(x,y,z):
-	for i in range(y-3):
-		for j in range(x):
+	for i in range(x):
+		for j in range(y-3):
 			if tablero[i][j] == z and tablero[i][j+1] == z and tablero[i][j+2] == z and tablero[i][j+3] == z:
 				return True
 
@@ -81,7 +81,7 @@ def verificacion(x,y,z):
 				return True
 
 def hvsh(p,r,x,y,z):
-    global j1, j2, emp, tablero, n1, n2
+    global j1, j2, emp, tablero, n1, n2, true
     cont = 0
     if z == 0:
         print(x,"va primero")
@@ -92,11 +92,10 @@ def hvsh(p,r,x,y,z):
             print("Es el turno de", x)
             try:
                 posi = int(input("Ingrese la fila que desee: "))
-                if jugada(posi,z):
-                    desplegart(p,r)
-                    if verificacion(p,r,piezaR):
-                        print(x,"gano la partida!\n")
-                        j2+= 1
+                if posi >5 or posi <= r:
+                    if cont == (p * r)-1:
+                        print("Es un empate!")
+                        emp += 1
                         print("Quieres la revancha? s/n")
                         revancha = input(">>>")
                         if revancha == "s":
@@ -104,28 +103,34 @@ def hvsh(p,r,x,y,z):
                             del tablero
                             tabla(p,r)
                             desplegart(p,r)
-                            return True
+                            break
                         else:
                             del tablero
+                            true = False
                             break
-                    z += 1
-                    cont += 1
-                elif cont == (p * r)-1:
-                    print("Es un empate!")
-                    emp += 1
-                    print("Quieres la revancha? s/n")
-                    revancha = input(">>>")
-                    if revancha == "s":
-                        z += 1
-                        del tablero
-                        tabla(p,r)
+                    elif jugada(posi,z):
                         desplegart(p,r)
-                        return True
+                        if verificacion(p,r,piezaR):
+                            print(x,"gano la partida!\n")
+                            j2+= 1
+                            print("Quieres la revancha? s/n")
+                            revancha = input(">>>")
+                            if revancha == "s":
+                                z += 1
+                                del tablero
+                                tabla(p,r)
+                                desplegart(p,r)
+                                return True
+                            else:
+                                del tablero
+                                true = False
+                                break
+                        z += 1
+                        cont += 1
                     else:
-                        del tablero
-                        break
+                        print('no hay espacio! :( \n')
                 else:
-                    print('no hay espacio! :( \n')
+                    print('esa linea no existe! :(\n')
             except ValueError:
                 print('esa opcion no es una linea! :(\n')
 
@@ -133,45 +138,50 @@ def hvsh(p,r,x,y,z):
             print("Es el turno de", y)
             try:
                 posi = int(input("Ingrese la fila que desee: "))
-                if jugada(posi,z):
-                    desplegart(p,r)
-                    if verificacion(p,r,piezaV):
-                        print(y,"gano la partida!\n")
-                        j2+= 1
+                if posi >5 or posi <= r:
+                    if cont == (p * r)-1:
+                        print("Es un empate!")
+                        emp += 1
                         print("Quieres la revancha? s/n")
                         revancha = input(">>>")
                         if revancha == "s":
-                            z -= 1
+                            z = 1
                             del tablero
                             tabla(p,r)
                             desplegart(p,r)
-                            return True
+                            break
                         else:
                             del tablero
+                            true = False
                             break
-                    z -= 1
-                    cont += 1
-                elif cont == (p * r)-1:
-                    print("Es un empate!")
-                    emp += 1
-                    print("Quieres la revancha? s/n")
-                    revancha = input(">>>")
-                    if revancha == "s":
-                        z = 1
-                        del tablero
-                        tabla(p,r)
+                    elif jugada(posi,z):
                         desplegart(p,r)
-                        return True
+                        if verificacion(p,r,piezaV):
+                            print(y,"gano la partida!\n")
+                            j2+= 1
+                            print("Quieres la revancha? s/n")
+                            revancha = input(">>>")
+                            if revancha == "s":
+                                z -= 1
+                                del tablero
+                                tabla(p,r)
+                                desplegart(p,r)
+                                break
+                            else:
+                                del tablero
+                                true = False
+                                break
+                        z -= 1
+                        cont += 1
                     else:
-                        del tablero
-                        break
+                        print('no hay espacio! :( \n')
                 else:
-                    print('no hay espacio! :( \n')
+                    print('esa linea no existe! :(\n')
             except ValueError:
                 print('esa opcion no es una linea! :(\n')
 
 def main():
-    global j1, j2, emp, tablero
+    global j1, j2, emp, tablero, true
     while True:
         print("1. HvsH")
         print('2. MvsH.... proximamente')
@@ -193,7 +203,7 @@ def main():
                                 n2 = input("Ingrese el 2 jugador: ")
                                 j = random.randint(0,1)
                                 hvsh(p,r,n1,n2,j)
-                                if hvsh(p,r,n1,n2,j):
+                                if true == True:
                                     hvsh(p,r,n1,n2,j)
                                 else:
                                     break
