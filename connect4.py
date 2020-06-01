@@ -10,7 +10,7 @@ j2 = 0
 emp = 0
 true = True
 puntos = 0
-
+'''
 def maquina(x,y):
     def mejorH(x,y):
         for i in range(x):
@@ -112,7 +112,7 @@ def maquina(x,y):
     			if tablero[j][i] == piezaR and tablero[j-1][i+1] == piezaR and tablero[j-2][i+2] == piezaR and tablero[j-3][i+3] == ' ':
                     jugada(i+3,1)
                     return Trues
-                    
+
     if mejorH(x,y):
         break
     if mejorV(x,y):
@@ -272,7 +272,7 @@ def maquina2(x,y):
         else:
             jugada(random.randint(1,y),0)
             break
-
+'''
 def tabla(x,y):
     global tablero
     tablero = []
@@ -462,7 +462,7 @@ def hvsh(p,r,x,y,z):
                     print('esa linea no existe! :(\n')
             except ValueError:
                 print('esa opcion no es una linea! :(\n')
-
+'''
 def mvsm(p,r,z):
     cont = 0
     tiradas = p*r
@@ -547,13 +547,13 @@ def mvsm(p,r,z):
                     break
             z -= 1
             cont += 1
-
+'''
 def main():
     global j1, j2, emp, tablero, true
     while True:
         print("1. HvsH")
-        print('2. MvsH.... proximamente')
-        print('3. MvsM.... proximamente')
+        print('2. MvsH.... fallo :(')
+        print('3. MvsM.... fallo :(')
         print('4. salir')
         try:
             opcion = int(input(""))
@@ -585,31 +585,7 @@ def main():
                             print('el tamanio de la fila es invalido.\n')
                     except ValueError:
                         print('eso no es un numero.\n')
-            elif opcion == 3:
-                true = True
-                while True:
-                    print("Ingrese el tamanio de la tabla: ")
-                    try:
-                        p = int(input("Fila: "))
-                        if p > 4 and p < 11:
-                            while true:
-                                try:
-                                    r = int(input("Columna: "))
-                                    if r > 5 and r < 11:
-                                        tabla(p,r)
-                                        print('')
-                                        desplegart(p,r)
-                                        z = random.randint(0,1)
-                                        while mvsm(p,r,z):
-                                            print('oooh shit, here we go again\n')
-                                    else:
-                                        print('el tamanio de la columna es invalido.\n')
-                                except ValueError:
-                                    print('dato ingresado no es una numero.\n')
-                        else:
-                            print('el tamanio de la fila es invalido.\n')
-                    except ValueError:
-                        print('eso no es un numero.\n')
+
             elif opcion == 4:
                 print('bye')
                 break
