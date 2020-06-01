@@ -1,6 +1,9 @@
 import random
 import re
 
+print('Grupo C\n')
+print('Andrea Melissa Perez Dominguez    - 20002447')
+print('Mario Augusto Schweinfurth Molina - 20001843')
 escalaT = re.compile('[5-9][x][6-9]')
 escalaT2 = re.compile('[1][0][x][1][0]')
 piezaR = "\033[0;31;01mO\033[0;37;01m"
@@ -11,6 +14,7 @@ emp = 0
 true = True
 puntos = 0
 '''
+# iba a ser una maquina para jugar pero fallo
 def maquina(x,y):
     def mejorH(x,y):
         for i in range(x):
@@ -273,6 +277,7 @@ def maquina2(x,y):
             jugada(random.randint(1,y),0)
             break
 '''
+#para generar la lista que funcionara como tabla del juego
 def tabla(x,y):
     global tablero
     tablero = []
@@ -282,6 +287,7 @@ def tabla(x,y):
             tablero[i].append(' ')
     return tablero
 
+# para agregar una ficha en la linea seleccionada donde 'y' determina el color de la ficha.
 def jugada(x,y):
     global tablero, piezaR, piezaV
     diccionario = {1:0,2:1,3:2,4:3,5:4,6:5,7:6,8:7,9:8,10:9}
@@ -306,6 +312,7 @@ def jugada(x,y):
     else:
         return False
 
+# para desplegar la lista de modo que se mire como un tablero.
 def desplegart(x,y):
     for i in range(0,y):
         if i == 0:
@@ -330,6 +337,7 @@ def desplegart(x,y):
         else:
             print('---', end='')
 
+# para verificar si despues de una ugada realizada, se a ganado el juego.
 def verificacion(x,y,z):
 	for i in range(x):
 		for j in range(y-3):
@@ -351,6 +359,7 @@ def verificacion(x,y,z):
 			if tablero[j][i] == z and tablero[j-1][i+1] == z and tablero[j-2][i+2] == z and tablero[j-3][i+3] == z:
 				return True
 
+# interaz de jugador contra jugador
 def hvsh(p,r,x,y,z):
     global j1, j2, emp, tablero, n1, n2, true
     cont = 0
@@ -364,7 +373,9 @@ def hvsh(p,r,x,y,z):
             print("Es el turno de!", x)
             try:
                 posi = int(input("\nIngrese la fila que desee: "))
+                #verificar que la linea sea valida
                 if posi>0 and posi < r+1:
+                    #verificar si el juego ya empato antes de hacer la jugada
                     if cont == (p * r)-1:
                         print("Es un empate!")
                         emp += 1
@@ -463,6 +474,7 @@ def hvsh(p,r,x,y,z):
             except ValueError:
                 print('esa opcion no es una linea! :(\n')
 '''
+#iba a ser la interfaz para que la maquina jugara contra la maquina2
 def mvsm(p,r,z):
     cont = 0
     tiradas = p*r
@@ -548,6 +560,7 @@ def mvsm(p,r,z):
             z -= 1
             cont += 1
 '''
+#menu principal
 def main():
     global j1, j2, emp, tablero, true
     while True:
