@@ -9,6 +9,269 @@ j1 = 0
 j2 = 0
 emp = 0
 true = True
+puntos = 0
+
+def maquina(x,y):
+    def mejorH(x,y):
+        for i in range(x):
+    		for j in range(y-3):
+    			if tablero[i][j] == piezaV and tablero[i][j+1] == piezaV and tablero[i][j+2] == piezaV and tablero[i][j+3] == ' ':
+                    jugada(j+3,1)
+                    return True
+                if tablero[i][j] == piezaV and tablero[i][j+1] == piezaV and tablero[i][j+2] == ' ' and tablero[i][j+3] == piezaV:
+                    jugada(j+2,1)
+                    return True
+                if tablero[i][j] == piezaV and tablero[i][j+1] == ' ' and tablero[i][j+2] == piezaV and tablero[i][j+3] == piezaV:
+                    jugada(j+1,1)
+                    return True
+                if tablero[i][j] == ' ' and tablero[i][j+1] == piezaV and tablero[i][j+2] == piezaV and tablero[i][j+3] == piezaV:
+                    jugada(j,1)
+                    return True
+
+    def mejorV(x,y):
+        for i in range(x):
+            for j in range(y-4):
+    			if tablero[j][i] == piezaV and tablero[j+1][i] == piezaV and tablero[j+2][i] == piezaV and tablero[j+3][i] == ' ':
+                    jugada(i,1)
+                    return True
+
+    def mejorD(x,y):
+        for i in range(y-3):
+    		for j in range(x-3):
+    			if tablero[j][i] == piezaV and tablero[j+1][i+1] == piezaV and tablero[j+2][i+2] == piezaV and tablero[j+3][i+3] == ' ':
+                    jugada(i+3,1)
+                    return True
+
+    def mejorDN(x,y):
+        for i in range(y-3):
+    		for j in range(3, x):
+    			if tablero[j][i] == piezaV and tablero[j-1][i+1] == piezaV and tablero[j-2][i+2] == piezaV and tablero[j-3][i+3] == ' ':
+                    jugada(i+3,1)
+                    return True
+
+    def jugadaH(x,y):
+        for i in range(x):
+    		for j in range(y-2):
+    			if tablero[i][j] == piezaV and tablero[i][j+1] == piezaV and tablero[i][j+2] == ' ':
+                    jugada(j+2,1)
+
+    def jugadaV(x,y):
+        for i in range(x):
+            for j in range(y-2):
+    			if tablero[j][i] == piezaV and tablero[j+1][i] == piezaV and tablero[j+2][i] == ' ':
+                    jugada(i,1)
+                    return True
+
+    def jugadaD(x,y):
+        for i in range(y-2):
+    		for j in range(x-2):
+    			if tablero[j][i] == piezaV and tablero[j+1][i+1] == piezaV and tablero[j+2][i+2] == ' ':
+                    jugada(i+2,1)
+                    return True
+
+    def jugadaDN(x,y):
+        for i in range(y-2):
+    		for j in range(2, x):
+    			if tablero[j][i] == piezaV and tablero[j-1][i+1] == piezaV and tablero[j-2][i+2] == ' ':
+                    jugada(i+2,1)
+                    return True
+
+    def bloqueoH(x,y):
+        for i in range(x):
+    		for j in range(y-3):
+    			if tablero[i][j] == piezaR and tablero[i][j+1] == piezaR and tablero[i][j+2] == piezaR and tablero[i][j+3] == ' ':
+                    jugada(j+3,1)
+                    return True
+                if tablero[i][j] == piezaR and tablero[i][j+1] == piezaR and tablero[i][j+2] == ' ' and tablero[i][j+3] == piezaR:
+                    jugada(j+2,1)
+                    return True
+                if tablero[i][j] == piezaR and tablero[i][j+1] == ' ' and tablero[i][j+2] == piezaR and tablero[i][j+3] == piezaR:
+                    jugada(j+1,1)
+                    return True
+                if tablero[i][j] == ' ' and tablero[i][j+1] == piezaR and tablero[i][j+2] == piezaR and tablero[i][j+3] == piezaR:
+                    jugada(j,1)
+                    return True
+
+    def bloqueoV(x,y):
+        for i in range(x):
+            for j in range(y-4):
+    			if tablero[j][i] == piezaR and tablero[j+1][i] == piezaR and tablero[j+2][i] == piezaR and tablero[j+3][i] == ' ':
+                    jugada(i,1)
+                    return Trues
+
+    def bloqueoD(x,y):
+        for i in range(y-3):
+    		for j in range(x-3):
+    			if tablero[j][i] == piezaR and tablero[j+1][i+1] == piezaR and tablero[j+2][i+2] == piezaR and tablero[j+3][i+3] == ' ':
+                    jugada(i+3,1)
+                    return Trues
+
+    def bloqueoDN(x,y):
+        for i in range(y-3):
+    		for j in range(3, x):
+    			if tablero[j][i] == piezaR and tablero[j-1][i+1] == piezaR and tablero[j-2][i+2] == piezaR and tablero[j-3][i+3] == ' ':
+                    jugada(i+3,1)
+                    return Trues
+                    
+    if mejorH(x,y):
+        break
+    if mejorV(x,y):
+        break
+    if mejorD(x,y):
+        break
+    if mejorDN(x,y):
+        break
+    if bloqueoH(x,y):
+        break
+    if bloqueoV(x,y):
+        break
+    if bloqueoD(x,y):
+        break
+    if bloqueoDN(x,y):
+        break
+    if jugadaH(x,y):
+        break
+    if jugadaV(x,y):
+        break
+    if jugadaD(x,y):
+        break
+    if jugadaDN(x,y):
+        break
+    if puntos == 0:
+        if y == 7:
+            jugada(4,1)
+            break
+        elif y == 9:
+            jugada(5,1)
+            break
+        else:
+            jugada(random.randint(1,y),1)
+            break
+
+def maquina2(x,y):
+    def mejorH(x,y):
+        for i in range(x):
+    		for j in range(y-3):
+    			if tablero[i][j] == piezaR and tablero[i][j+1] == piezaR and tablero[i][j+2] == piezaR and tablero[i][j+3] == ' ':
+                    jugada(j+3,0)
+                    return True
+                if tablero[i][j] == piezaR and tablero[i][j+1] == piezaR and tablero[i][j+2] == ' ' and tablero[i][j+3] == piezaR:
+                    jugada(j+2,0)
+                    return True
+                if tablero[i][j] == piezaR and tablero[i][j+1] == ' ' and tablero[i][j+2] == piezaR and tablero[i][j+3] == piezaR:
+                    jugada(j+1,0)
+                    return True
+                if tablero[i][j] == ' ' and tablero[i][j+1] == piezaR and tablero[i][j+2] == piezaR and tablero[i][j+3] == piezaR:
+                    jugada(j,0)
+                    return True
+    def mejorV(x,y):
+        for i in range(x):
+            for j in range(y-4):
+    			if tablero[j][i] == piezaR and tablero[j+1][i] == piezaR and tablero[j+2][i] == piezaR and tablero[j+3][i] == ' ':
+                    jugada(i,0)
+                    return True
+    def mejorD(x,y):
+        for i in range(y-3):
+    		for j in range(x-3):
+    			if tablero[j][i] == piezaR and tablero[j+1][i+1] == piezaR and tablero[j+2][i+2] == piezaR and tablero[j+3][i+3] == ' ':
+                    jugada(i+3,0)
+                    return True
+    def mejorDN(x,y):
+        for i in range(y-3):
+    		for j in range(3, x):
+    			if tablero[j][i] == piezaR and tablero[j-1][i+1] == piezaR and tablero[j-2][i+2] == piezaR and tablero[j-3][i+3] == ' ':
+                    jugada(i+3,0)
+                    return True
+    def jugadaH(x,y):
+        for i in range(x):
+    		for j in range(y-2):
+    			if tablero[i][j] == piezaR and tablero[i][j+1] == piezaR and tablero[i][j+2] == ' ':
+                    jugada(j+2,0)
+    def jugadaV(x,y):
+        for i in range(x):
+            for j in range(y-2):
+    			if tablero[j][i] == piezaR and tablero[j+1][i] == piezaR and tablero[j+2][i] == ' ':
+                    jugada(i,0)
+                    return True
+    def jugadaD(x,y):
+        for i in range(y-2):
+    		for j in range(x-2):
+    			if tablero[j][i] == piezaR and tablero[j+1][i+1] == piezaR and tablero[j+2][i+2] == ' ':
+                    jugada(i+2,0)
+                    return True
+    def jugadaDN(x,y):
+        for i in range(y-2):
+    		for j in range(2, x):
+    			if tablero[j][i] == piezaR and tablero[j-1][i+1] == piezaR and tablero[j-2][i+2] == ' ':
+                    jugada(i+2,0)
+                    return True
+    def bloqueoH(x,y):
+        for i in range(x):
+    		for j in range(y-3):
+    			if tablero[i][j] == piezaV and tablero[i][j+1] == piezaV and tablero[i][j+2] == piezaV and tablero[i][j+3] == ' ':
+                    jugada(j+3,0)
+                    return True
+                if tablero[i][j] == piezaV and tablero[i][j+1] == piezaV and tablero[i][j+2] == ' ' and tablero[i][j+3] == piezaV:
+                    jugada(j+2,0)
+                    return True
+                if tablero[i][j] == piezaV and tablero[i][j+1] == ' ' and tablero[i][j+2] == piezaV and tablero[i][j+3] == piezaV:
+                    jugada(j+1,0)
+                    return True
+                if tablero[i][j] == ' ' and tablero[i][j+1] == piezaV and tablero[i][j+2] == piezaV and tablero[i][j+3] == piezaV:
+                    jugada(j,0)
+                    return True
+    def bloqueoV(x,y):
+        for i in range(x):
+            for j in range(y-4):
+    			if tablero[j][i] == piezaV and tablero[j+1][i] == piezaV and tablero[j+2][i] == piezaV and tablero[j+3][i] == ' ':
+                    jugada(i,0)
+                    return Trues
+    def bloqueoD(x,y):
+        for i in range(y-3):
+    		for j in range(x-3):
+    			if tablero[j][i] == piezaV and tablero[j+1][i+1] == piezaV and tablero[j+2][i+2] == piezaV and tablero[j+3][i+3] == ' ':
+                    jugada(i+3,0)
+                    return Trues
+    def bloqueoDN(x,y):
+        for i in range(y-3):
+    		for j in range(3, x):
+    			if tablero[j][i] == piezaV and tablero[j-1][i+1] == piezaV and tablero[j-2][i+2] == piezaV and tablero[j-3][i+3] == ' ':
+                    jugada(i+3,0)
+                    return Trues
+    if mejorH(x,y):
+        break
+    if mejorV(x,y):
+        break
+    if mejorD(x,y):
+        break
+    if mejorDN(x,y):
+        break
+    if bloqueoH(x,y):
+        break
+    if bloqueoV(x,y):
+        break
+    if bloqueoD(x,y):
+        break
+    if bloqueoDN(x,y):
+        break
+    if jugadaH(x,y):
+        break
+    if jugadaV(x,y):
+        break
+    if jugadaD(x,y):
+        break
+    if jugadaDN(x,y):
+        break
+    if puntos == 0:
+        if y == 7:
+            jugada(4,0)
+            break
+        elif y == 9:
+            jugada(5,0)
+            break
+        else:
+            jugada(random.randint(1,y),0)
+            break
 
 def tabla(x,y):
     global tablero
@@ -200,6 +463,91 @@ def hvsh(p,r,x,y,z):
             except ValueError:
                 print('esa opcion no es una linea! :(\n')
 
+def mvsm(p,r,z):
+    cont = 0
+    tiradas = p*r
+    if z == 0:
+        print("Maquina 1 va primero\n")
+    else:
+        print("Maquina 2 va primero\n")
+    while True:
+        if z == 0:
+            print("Es el turno de Maquina 1!")
+            if cont == (p * r)-1:
+                print("Es un empate!")
+                print("\nQuieres la revancha? s/n")
+                revancha = input(">>>")
+                if revancha == "s":
+                    z += 1
+                    del tablero
+                    tabla(p,r)
+                    desplegart(p,r)
+                    break
+                else:
+                    del tablero
+                    true = False
+                    break
+            maquina(p,r)
+            desplegart(p,r)
+            tiradas -= 1
+            print('tiradas faltantes!', tiradas)
+            print('Maquina 1 con fichas', piezaV, end=" || ")
+            print('Maquina 2 con fichas', piezaR)
+            if verificacion(p,r,piezaV):
+                print("Maquina 1 gano la partida!\n")
+                print("\nQuieres la revancha? s/n")
+                revancha = input(">>>")
+                if revancha == "s":
+                    z += 1
+                    del tablero
+                    tabla(p,r)
+                    desplegart(p,r)
+                    return True
+                else:
+                    del tablero
+                    true = False
+                    break
+            z += 1
+            cont += 1
+        elif z == 1:
+            print("Es el turno de Maquina 2!")
+            if cont == (p * r)-1:
+                print("Es un empate!")
+                print("\nQuieres la revancha? s/n")
+                revancha = input(">>>")
+                if revancha == "s":
+                    z -= 1
+                    del tablero
+                    tabla(p,r)
+                    desplegart(p,r)
+                    break
+                else:
+                    del tablero
+                    true = False
+                    break
+            maquina2(p,r)
+            desplegart(p,r)
+            tiradas -= 1
+            print('tiradas faltantes!', tiradas)
+            print('Maquina 1 con fichas', piezaV, end=" || ")
+            print('Maquina 2 con fichas', piezaR)
+            if verificacion(p,r,piezaR):
+                print("Maquina 1 gano la partida!\n")
+                print("\nQuieres la revancha? s/n")
+                revancha = input(">>>")
+                if revancha == "s":
+                    z -= 1
+                    del tablero
+                    tabla(p,r)
+                    desplegart(p,r)
+                    return True
+                else:
+                    del tablero
+                    true = False
+                    break
+            z -= 1
+            cont += 1
+
 def main():
     global j1, j2, emp, tablero, true
     while True:
@@ -237,9 +585,31 @@ def main():
                             print('el tamanio de la fila es invalido.\n')
                     except ValueError:
                         print('eso no es un numero.\n')
-
-
-
+            elif opcion == 3:
+                true = True
+                while True:
+                    print("Ingrese el tamanio de la tabla: ")
+                    try:
+                        p = int(input("Fila: "))
+                        if p > 4 and p < 11:
+                            while true:
+                                try:
+                                    r = int(input("Columna: "))
+                                    if r > 5 and r < 11:
+                                        tabla(p,r)
+                                        print('')
+                                        desplegart(p,r)
+                                        z = random.randint(0,1)
+                                        while mvsm(p,r,z):
+                                            print('oooh shit, here we go again\n')
+                                    else:
+                                        print('el tamanio de la columna es invalido.\n')
+                                except ValueError:
+                                    print('dato ingresado no es una numero.\n')
+                        else:
+                            print('el tamanio de la fila es invalido.\n')
+                    except ValueError:
+                        print('eso no es un numero.\n')
             elif opcion == 4:
                 print('bye')
                 break
