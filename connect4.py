@@ -1,7 +1,7 @@
 import random
 import re
 
-print('Grupo C\n')
+print('Grupo 7C\n')
 print('Andrea Melissa Perez Dominguez    - 20002447')
 print('Mario Augusto Schweinfurth Molina - 20001843')
 escalaT = re.compile('[5-9][x][6-9]')
